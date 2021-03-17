@@ -1,0 +1,25 @@
+type PromoCard {
+    quantity        : Float,
+    promoAmount     : Float,
+    status          : Boolean,
+    message         : String
+}
+
+type PromoCardDesign {
+    cardid              : Int,
+    carddesc            : String,    
+    cardimagename       : String,
+    carddisplayorder    : Int,
+    styles              : String,
+    type                : String,
+}
+
+input PromoInput {
+    total           : Float!,
+    groupid         : String!,
+    merchantid      : String!
+}
+
+extend type Query {
+    getPromoCard(input: PromoInput!) : PromoCard
+}

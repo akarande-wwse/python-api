@@ -1,0 +1,40 @@
+type Retailer {
+    retailerId: Int
+    groupId: String
+    merchantId: String
+    transId: String
+    retailerName: String
+    retailerLogo: String
+    retailerActive: String
+    retailerProfiles: [RetailerProfile]
+    categories: [Category]
+    tokenKey: String
+    customStyle: String
+    bannerName: String
+    status: Boolean
+    message: String
+}
+
+type RetailerProfile {
+    retailerprofilename: String
+    retailerprofilevalue: String
+}
+
+type Category {
+    catid: Int
+    catdesc: String
+    catdisplayorder: Int
+    cards: [CardDesign]
+}
+
+type CardDesign {
+    cardid: Int
+    carddesc: String
+    cardimagename: String
+    carddisplayorder: Int
+    styles: String
+}
+
+type Query {
+    getRetailer(groupid: String!, merchantid: String!): Retailer
+}
