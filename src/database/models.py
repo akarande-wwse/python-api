@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, LargeBinary, String, Table, Text, UniqueConstraint, text, and_
+from sqlalchemy import BigInteger, CHAR, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, String, Table, Text, Boolean, UniqueConstraint, text, and_
 from sqlalchemy.orm import relationship, defer
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -55,18 +55,6 @@ class Category(Base):
     catdisplayorder = Column(Integer)
 
     cards = relationship('Card', secondary='catcardmap', lazy='joined')
-
-
-class Client(Base):
-    __tablename__ = 'client'
-    __table_args__ = (
-        CheckConstraint("(active)::text = ANY (ARRAY[('Y'::character varying)::text, ('N'::character varying)::text])"),
-    )
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String(255), nullable=False)
-    description = Column(String(255))
-    active = Column(String(1), nullable=False, server_default=text("'Y'::character varying"))
 
 
 class Retailer(Base):
@@ -239,6 +227,7 @@ class PromoConfig(Base):
     todate = Column(DateTime)
     catid = Column(Integer)
     bannername = Column(Text)
+    active = Column(Boolean)
     
     
 class PromoConfigDetail(Base):

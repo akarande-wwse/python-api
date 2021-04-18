@@ -12,8 +12,7 @@ def get_retailer(_, info, **args):
     return ret.get_retailer(**args)
 
 
-def resolve_custom_style(obj, *_):
-    custom_style = obj.custom_style
+def resolve_custom_style(custom_style):
     if custom_style:
         groupid = custom_style.groupid
         merchantid = custom_style.merchantid
@@ -27,8 +26,7 @@ map_resolver(retailer, {
     "groupId": lambda obj, *_: obj.groupid,
     "retailerName": lambda obj, *_: obj.retailername,
     "retailerActive": lambda obj, *_: obj.retaileractive,
-    "bannerName": lambda obj, *_: "",
-    "customStyle": resolve_custom_style,
+    "customStyle": lambda obj, *_: resolve_custom_style(obj.custom_style)
 })
 
 resolvers = query, retailer
